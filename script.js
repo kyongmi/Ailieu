@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(){
 
 let popup = document.querySelector(".area14");
-let closeBtn = document.querySelector(".area14 .close");
+let closeBtns = document.querySelectorAll(".area14 .close, .area14 .close2");
 let popupShown = false;
 
 function showPopup(){
@@ -16,12 +16,14 @@ function closePopup(e){
   popup.classList.remove("active");
 }
 
-closeBtn.addEventListener("click", closePopup);
-
+/* close と close2 両方対応 */
+closeBtns.forEach(function(btn){
+  btn.addEventListener("click", closePopup);
+});
 
 
 /* -----------------------
-   ① PC 離脱検知
+   PC 離脱検知
 ----------------------- */
 
 document.addEventListener("mouseleave", function(e){
@@ -32,7 +34,7 @@ document.addEventListener("mouseleave", function(e){
 
 
 /* -----------------------
-   ② 戻るボタン検知（SP対応）
+   戻るボタン（SP）
 ----------------------- */
 
 history.pushState(null,null,location.href);
@@ -44,7 +46,7 @@ window.addEventListener("popstate", function(){
 
 
 /* -----------------------
-   ③ ページ最下部スクロール
+   最下部スクロール
 ----------------------- */
 
 window.addEventListener("scroll", function(){
